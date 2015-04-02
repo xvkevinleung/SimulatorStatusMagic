@@ -31,6 +31,12 @@ typedef NS_ENUM(NSInteger, SDStatusBarManagerBluetoothState)
   SDStatusBarManagerBluetoothVisibleConnected
 };
 
+typedef NS_ENUM(NSInteger, SDStatusBarManagerIcon)
+{
+  SDStatusBarManagerIconVPN = 21
+};
+
+
 @interface SDStatusBarManager : NSObject
 
 @property (assign, nonatomic, readonly) BOOL usingOverrides;
@@ -38,6 +44,8 @@ typedef NS_ENUM(NSInteger, SDStatusBarManagerBluetoothState)
 
 - (void)enableOverrides;
 - (void)disableOverrides;
+
+- (void)displayIcon:(SDStatusBarManagerIcon)icon hidden:(BOOL)hidden;
 
 + (SDStatusBarManager *)sharedInstance;
 

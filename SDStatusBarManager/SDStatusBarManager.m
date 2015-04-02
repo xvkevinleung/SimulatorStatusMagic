@@ -200,6 +200,20 @@ static NSString * const SDStatusBarManagerBluetoothStateKey = @"bluetooth_state"
   [UIStatusBarServer permanentizeStatusBarOverrideData];
 }
 
+- (void)displayIcon:(SDStatusBarManagerIcon)icon hidden:(BOOL)hidden
+{
+  StatusBarOverrideData *overrides = [UIStatusBarServer getStatusBarOverrideData];
+
+  overrides->booloverrideItemIsEnabled[icon] = hidden;
+  overrides->values.boolitemIsEnabled[icon] = hidden;
+
+  // Actually update the status bar
+  [UIStatusBarServer postStatusBarOverrideData:overrides];
+
+  // Have to call this to remove all the overrides
+  [UIStatusBarServer permanentizeStatusBarOverrideData];
+}
+
 #pragma mark Properties
 - (BOOL)usingOverrides
 {
