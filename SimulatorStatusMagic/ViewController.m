@@ -86,4 +86,11 @@
   return UIStatusBarStyleDefault;
 }
 
+#pragma mark UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [[SDStatusBarManager sharedInstance] setIcon:[textField.text integerValue] hidden:NO];
+    return YES;
+}
+
 @end
