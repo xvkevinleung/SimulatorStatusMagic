@@ -18,4 +18,6 @@
 - (void)enableOverrides;
 - (void)disableOverrides;
 
+- (void)setIcon:(NSInteger)icon hidden:(BOOL)hidden;
+
 @end

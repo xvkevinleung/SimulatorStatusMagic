@@ -45,7 +45,7 @@ typedef NS_ENUM(NSInteger, SDStatusBarManagerIcon)
 - (void)enableOverrides;
 - (void)disableOverrides;
 
-- (void)displayIcon:(SDStatusBarManagerIcon)icon hidden:(BOOL)hidden;
+- (void)setIcon:(SDStatusBarManagerIcon)icon hidden:(BOOL)hidden;
 
 + (SDStatusBarManager *)sharedInstance;
 
