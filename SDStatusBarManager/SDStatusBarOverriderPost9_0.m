@@ -195,4 +195,18 @@ typedef struct {
   [UIStatusBarServer permanentizeStatusBarOverrideData];
 }
 
+- (void)setIcon:(NSInteger)icon hidden:(BOOL)hidden;
+{
+  StatusBarOverrideData *overrides = [UIStatusBarServer getStatusBarOverrideData];
+
+  overrides->booloverrideItemIsEnabled[icon] = !hidden;
+  overrides->values.boolitemIsEnabled[icon] = !hidden;
+
+  // Actually update the status bar
+  [UIStatusBarServer postStatusBarOverrideData:overrides];
+
+  // Have to call this to remove all the overrides
+  [UIStatusBarServer permanentizeStatusBarOverrideData];
+}
+
 @end

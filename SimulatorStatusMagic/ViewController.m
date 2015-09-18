@@ -70,6 +70,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
   [textField resignFirstResponder];
+  [[SDStatusBarManager sharedInstance] setIcon:SDStatusBarManagerIconVPN hidden:NO];
   return YES;
 }
 
@@ -103,13 +104,6 @@
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
   return UIStatusBarStyleDefault;
-}
-
-#pragma mark UITextFieldDelegate
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [[SDStatusBarManager sharedInstance] setIcon:[textField.text integerValue] hidden:NO];
-    return YES;
 }
 
 @end
