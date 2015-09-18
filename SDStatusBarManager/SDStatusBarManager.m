@@ -26,9 +26,11 @@
 #import "SDStatusBarManager.h"
 #import "SDStatusBarOverriderPre8_3.h"
 #import "SDStatusBarOverriderPost8_3.h"
+#import "SDStatusBarOverriderPost9_0.h"
 
 static NSString * const SDStatusBarManagerUsingOverridesKey = @"using_overrides";
 static NSString * const SDStatusBarManagerBluetoothStateKey = @"bluetooth_state";
+static NSString * const SDStatusBarManagerTimeStringKey = @"time_string";
 
 @interface SDStatusBarManager ()
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
@@ -42,6 +44,7 @@ static NSString * const SDStatusBarManagerBluetoothStateKey = @"bluetooth_state"
   self.usingOverrides = YES;
 
   self.overrider.timeString = [self localizedTimeString];
+  self.overrider.carrierName = self.carrierName;
   self.overrider.bluetoothEnabled = self.bluetoothState != SDStatusBarManagerBluetoothHidden;
   self.overrider.bluetoothConnected = self.bluetoothState == SDStatusBarManagerBluetoothVisibleConnected;
 
@@ -88,6 +91,23 @@ static NSString * const SDStatusBarManagerBluetoothStateKey = @"bluetooth_state"
   return [[self.userDefaults valueForKey:SDStatusBarManagerBluetoothStateKey] integerValue];
 }
 
+- (void)setTimeString:(NSString *)timeString
+{
+  if ([self.timeString isEqualToString:timeString]) return;
+  
+  [self.userDefaults setObject:timeString forKey:SDStatusBarManagerTimeStringKey];
+
+  if (self.usingOverrides) {
+    // Refresh the active status bar
+    [self enableOverrides];
+  }
+}
+
+- (NSString *)timeString
+{
+  return [self.userDefaults valueForKey:SDStatusBarManagerTimeStringKey];
+}
+
 - (NSUserDefaults *)userDefaults
 {
   if (!_userDefaults) {
@@ -99,11 +119,14 @@ static NSString * const SDStatusBarManagerBluetoothStateKey = @"bluetooth_state"
 - (id<SDStatusBarOverrider>)overrider
 {
   if (!_overrider) {
+    BOOL before9_0 = ([[[UIDevice currentDevice] systemVersion] compare:@"9.0" options:NSNumericSearch] == NSOrderedAscending);
     BOOL before8_3 = ([[[UIDevice currentDevice] systemVersion] compare:@"8.3" options:NSNumericSearch] == NSOrderedAscending);
     if (before8_3) {
       _overrider = [SDStatusBarOverriderPre8_3 new];
-    } else {
+    } else if (before9_0) {
       _overrider = [SDStatusBarOverriderPost8_3 new];
+    } else {
+      _overrider = [SDStatusBarOverriderPost9_0 new];
     }
   }
   return _overrider;
@@ -112,6 +135,10 @@ static NSString * const SDStatusBarManagerBluetoothStateKey = @"bluetooth_state"
 #pragma mark Date helper
 - (NSString *)localizedTimeString
 {
+  if (self.timeString.length > 0) {
+    return self.timeString;
+  }
+  
   NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
   formatter.dateStyle = NSDateFormatterNoStyle;
   formatter.timeStyle = NSDateFormatterShortStyle;
