@@ -215,7 +215,7 @@ typedef struct {
   [UIStatusBarServer permanentizeStatusBarOverrideData];
 }
 
-- (void)setIcon:(NSInteger)icon hidden:(BOOL)hidden;
+- (void)setIcon:(NSInteger)icon hidden:(BOOL)hidden
 {
   StatusBarOverrideData *overrides = [UIStatusBarServer getStatusBarOverrideData];
 
