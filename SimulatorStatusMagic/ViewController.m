@@ -66,12 +66,9 @@
   [[SDStatusBarManager sharedInstance] setBluetoothState:sender.selectedSegmentIndex];
 }
 
-#pragma mark Text field delegate
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
+- (IBAction)iconTextFieldEditingChanged:(UITextField*)textField
 {
-  [textField resignFirstResponder];
-  [[SDStatusBarManager sharedInstance] setIcon:SDStatusBarManagerIconVPN hidden:NO];
-  return YES;
+    [[SDStatusBarManager sharedInstance] setIcon:[textField.text integerValue] hidden:NO];
 }
 
 #pragma mark UI helpers

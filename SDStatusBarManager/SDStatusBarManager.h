@@ -33,7 +33,7 @@ typedef NS_ENUM(NSInteger, SDStatusBarManagerBluetoothState)
 
 typedef NS_ENUM(NSInteger, SDStatusBarManagerIcon)
 {
-  SDStatusBarManagerIconVPN = 22
+  SDStatusBarManagerIconVPN = 24
 };
 
 

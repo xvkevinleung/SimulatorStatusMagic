@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -62,6 +62,20 @@
                                     <action selector="overrideButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="u6d-d9-0ab"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Icon ID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dU5-ua-Q8i">
+                                <rect key="frame" x="274" y="235" width="53" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="22" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nlX-de-6T1">
+                                <rect key="frame" x="281" y="264" width="38" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="iconTextFieldEditingChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="SbP-Tk-j3M"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -75,14 +89,13 @@
                             <constraint firstAttribute="centerX" secondItem="1W5-6m-qnr" secondAttribute="centerX" constant="-0.5" id="Prz-cE-8oA"/>
                             <constraint firstItem="1W5-6m-qnr" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="Vqa-Qz-Ja3"/>
                             <constraint firstItem="Omy-wd-t1z" firstAttribute="top" secondItem="QuK-wD-2d0" secondAttribute="bottom" constant="22" id="YAw-nZ-4Ni"/>
+                            <constraint firstItem="nlX-de-6T1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YZk-1S-J9A"/>
                             <constraint firstAttribute="centerX" secondItem="CcU-Mb-bVk" secondAttribute="centerX" id="qxc-YV-wRm"/>
+                            <constraint firstItem="dU5-ua-Q8i" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rJf-VY-MNv"/>
+                            <constraint firstItem="nlX-de-6T1" firstAttribute="top" secondItem="dU5-ua-Q8i" secondAttribute="bottom" constant="8" id="rgz-C5-9Zp"/>
+                            <constraint firstItem="dU5-ua-Q8i" firstAttribute="top" secondItem="Omy-wd-t1z" secondAttribute="bottom" constant="8" id="t1R-GO-T0P"/>
                             <constraint firstAttribute="centerX" secondItem="Omy-wd-t1z" secondAttribute="centerX" id="xaa-SO-MPw"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="HwQ-bH-TKM"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="bluetoothSegmentedControl" destination="VEX-a6-wUU" id="L7z-KL-JJm"/>
